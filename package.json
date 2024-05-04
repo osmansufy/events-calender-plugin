@@ -1,0 +1,28 @@
+{
+	"name": "@osman/os-event-calendar",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format:check": "prettier --check .",
+		"format:fix": "prettier --write ."
+	},
+	"devDependencies": {
+		"@kucrut/vite-for-wp": "^0.8.0",
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
+		"@vitejs/plugin-react": "^4.1.1",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38",
+		"prettier": "npm:wp-prettier@^3.0.3-beta-4",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"rollup-plugin-external-globals": "^0.8.0",
+		"tailwindcss": "^3.4.3",
+		"vite": "^4.4.11",
+		"vite-plugin-external": "^4.0.1"
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "osman/os-event-calendar",
+	"description": "A plugin to demonstrate Vite for WP integration.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-only",
+	"authors": [
+		{
+			"name": "Osman Sufy",
+			"email": "osmansufy@gmail.com"
+		}
+	],
+	"require": {
+		"kucrut/vite-for-wp": "^0.8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"OS_Event_Calendar\\": "inc/classes/"
+		}
+	}
+}
