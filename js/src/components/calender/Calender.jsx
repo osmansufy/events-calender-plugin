@@ -17,6 +17,7 @@ const Calender = () => {
 			};
 		} );
 	};
+
 	useEffect( () => {
 		fetch( '/wp-json/wp/v2/events/?_fields=post-meta-fields,title,id,link' )
 			.then( res => res.json() )
@@ -26,10 +27,20 @@ const Calender = () => {
 				setEvents( formattedEvents );
 			} );
 	}, [] );
+	const onChangeMonth = ( /** @type {number} */ month ) => {
+		let newDate = new Date( currentDate );
+		newDate.setMonth( newDate.getMonth() + month );
+		setCurrentDate( newDate );
+	};
 
+	const onChangeYear = ( /** @type {number} */ year ) => {
+		let newDate = new Date( currentDate );
+		newDate.setFullYear( newDate.getFullYear() + year );
+		setCurrentDate( newDate );
+	};
 	return (
 		<div>
-			<CalenderMonth day={ currentDate } events={ events } />
+			<CalenderMonth day={ currentDate } events={ events } onChangeMonth={ onChangeMonth } />
 		</div>
 	);
 };

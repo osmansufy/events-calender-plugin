@@ -1,5 +1,5 @@
 {
-	"include": [ "vite.config.js", "js/**/*" ],
+	"include": [ "vite.config.js", "js/**/*", "assets/js/script.js" ],
 	"compilerOptions": {
 		"allowJs": true,
 		"baseUrl": "./",

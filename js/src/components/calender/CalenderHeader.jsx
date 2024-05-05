@@ -2,6 +2,7 @@ const CalenderHeader = (
 	/** @type {
     {
         day: Date;
+		onChangeMonth: (month: number) => void;
     
     }
 } */ props,
@@ -9,17 +10,18 @@ const CalenderHeader = (
 	let currentMonth = props.day.toLocaleString( 'default', { month: 'long' } );
 	let currentYear = props.day.getFullYear();
 	return (
-		<div className="header flex justify-between border-b p-2">
-			<span className="text-lg font-bold">
-				{ ' ' }
-				{ currentYear } { currentMonth }{ ' ' }
-			</span>
+		<div className="header flex justify-between border-b p-8">
 			<div className="buttons">
-				<button className="p-1">
+				<button
+					className="p-4"
+					onClick={
+						/** @type {any} */
+						() => props.onChangeMonth( -1 )
+					}>
 					<svg
-						width="1em"
+						width="2em"
 						fill="gray"
-						height="1em"
+						height="2em"
 						viewBox="0 0 16 16"
 						className="bi bi-arrow-left-circle"
 						xmlns="http://www.w3.org/2000/svg">
@@ -37,11 +39,16 @@ const CalenderHeader = (
 						/>
 					</svg>
 				</button>
-				<button className="p-1">
+				<button
+					className="p-1"
+					onClick={
+						/** @type {any} */
+						() => props.onChangeMonth( 1 )
+					}>
 					<svg
-						width="1em"
+						width="2em"
 						fill="gray"
-						height="1em"
+						height="2em"
 						viewBox="0 0 16 16"
 						className="bi bi-arrow-right-circle"
 						xmlns="http://www.w3.org/2000/svg">
@@ -60,6 +67,10 @@ const CalenderHeader = (
 					</svg>
 				</button>
 			</div>
+			<span className="text-lg font-bold">
+				{ ' ' }
+				{ currentYear } { currentMonth }{ ' ' }
+			</span>
 		</div>
 	);
 };

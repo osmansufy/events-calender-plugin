@@ -13,11 +13,10 @@ use Kucrut\Vite;
  */
 function bootstrap(): void
 {
-	// add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_script');
+	add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\frontend_enqueue_script');
 
 	// enqueue_script in admin page
 	add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_script');
-	// add_action( 'wp_footer', __NAMESPACE__ . '\\render_app' );
 }
 
 
@@ -36,4 +35,15 @@ function enqueue_script(): void
 			'in-footer' => true,
 		]
 	);
+}
+
+
+/**
+ * Enqueue script for frontend
+ */
+
+function frontend_enqueue_script(): void
+{
+	wp_enqueue_script('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/js/script.js', [], OS_EVENT_CALENDAR_VERSION, true);
+	wp_enqueue_style('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/css/style.css', [], OS_EVENT_CALENDAR_VERSION);
 }

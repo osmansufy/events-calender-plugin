@@ -19,13 +19,25 @@ require_once __DIR__ . '/inc/frontend.php';
 
 final class OS_Event_Calendar
 {
-
+    const VERSION = '0.0.1';
     public function __construct()
     {
         $this->init();
+        $this->constants();
         register_activation_hook(__FILE__, [__CLASS__, 'activate']);
         register_deactivation_hook(__FILE__, [__CLASS__, 'deactivate']);
         bootstrap();
+    }
+
+
+
+    public function constants()
+    {
+        define('OS_EVENT_CALENDAR_VERSION', self::VERSION);
+        define('OS_EVENT_CALENDAR_FILE', __FILE__);
+        define('OS_EVENT_CALENDAR_PATH', __DIR__);
+        define('OS_EVENT_CALENDAR_URL', plugins_url('', OS_EVENT_CALENDAR_FILE));
+        define('OS_EVENT_CALENDAR_ASSETS', OS_EVENT_CALENDAR_URL . '/assets');
     }
 
 

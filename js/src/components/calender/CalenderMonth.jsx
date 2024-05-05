@@ -7,6 +7,7 @@ const CalenderMonth = (
     {
         day: Date;
         events: any[];
+		onChangeMonth: (month: number) => void;
     }
 } */ props,
 ) => {
@@ -80,7 +81,7 @@ const CalenderMonth = (
 		<div>
 			<div className="container mx-auto mt-10">
 				<div className="wrapper bg-white rounded shadow w-full ">
-					<CalenderHeader day={ props.day } />
+					<CalenderHeader day={ props.day } onChangeMonth={ props.onChangeMonth } />
 					<table className="w-full">
 						<CalenderWeeks />
 						<tbody>

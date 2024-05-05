@@ -16,9 +16,19 @@ class WR_Events
         add_action('manage_event_posts_custom_column', array($this, 'cs_event_custom_column'), 10, 2);
 
         add_filter('manage_edit-event_sortable_columns', array($this, 'cs_event_sortable_columns'));
+        add_filter('template_include', array($this, 'custom_event_template'));
     }
 
-
+    function custom_event_template($template)
+    {
+        if (is_singular('event')) {
+            $new_template = OS_EVENT_CALENDAR_PATH . '/templates/single-event.php';
+            if ('' !== $new_template) {
+                return $new_template;
+            }
+        }
+        return $template;
+    }
 
     public static function cs_register_event_post_type()
     {
