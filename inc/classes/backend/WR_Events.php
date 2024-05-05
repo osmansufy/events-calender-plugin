@@ -11,7 +11,13 @@ class WR_Events
         add_action('init', [__CLASS__, 'cs_register_event_post_type']);
         add_action('add_meta_boxes', array($this, 'cs_add_event_metabox'));
         add_action('save_post', array($this, 'cs_save_event_metabox'));
+        add_filter('manage_event_posts_columns', array($this, 'cs_add_event_columns'));
+
+        add_action('manage_event_posts_custom_column', array($this, 'cs_event_custom_column'), 10, 2);
+
+        add_filter('manage_edit-event_sortable_columns', array($this, 'cs_event_sortable_columns'));
     }
+
 
 
     public static function cs_register_event_post_type()
@@ -49,6 +55,7 @@ class WR_Events
             'show_in_rest' => true,
             'rest_base' => 'events',
             'rest_controller_class' => 'WP_REST_Posts_Controller',
+            'menu_icon' => 'dashicons-schedule',
             'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments')
         );
 
@@ -103,5 +110,33 @@ class WR_Events
                 $_POST['cs_event_time']
             );
         }
+    }
+
+    public static function cs_add_event_columns($columns)
+    {
+        $columns['cs_event_date'] = 'Event Date';
+        $columns['cs_event_time'] = 'Event Time';
+        return $columns;
+    }
+
+    public static function cs_event_custom_column($column, $post_id)
+    {
+        switch ($column) {
+            case 'cs_event_date':
+                $event_date = get_post_meta($post_id, 'cs_event_date', true);
+                echo $event_date;
+                break;
+            case 'cs_event_time':
+                $event_time = get_post_meta($post_id, 'cs_event_time', true);
+                echo $event_time;
+                break;
+        }
+    }
+
+    public static function cs_event_sortable_columns($columns)
+    {
+        $columns['cs_event_date'] = 'cs_event_date';
+        $columns['cs_event_time'] = 'cs_event_time';
+        return $columns;
     }
 }
