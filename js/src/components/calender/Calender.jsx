@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import CalenderMonth from './CalenderMonth';
 
 const Calender = () => {
+	const [ currentDate, setCurrentDate ] = useState( new Date() );
 
-    const [events, setEvents] = useState([]);
+	const [ events, setEvents ] = useState( [] );
 
-    const daysInShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const monthsInShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	const formatEvents = ( /** @type {any[]} */ events ) => {
+		return events.map( event => {
+			return {
+				id: event.id,
+				title: event.title.rendered,
+				date: new Date( event[ 'post-meta-fields' ].cs_event_date[ 0 ] ),
+				time: event[ 'post-meta-fields' ]?.cs_event_time[ 0 ],
+				eventLink: event.link,
+			};
+		} );
+	};
+	useEffect( () => {
+		fetch( '/wp-json/wp/v2/events/?_fields=post-meta-fields,title,id,link' )
+			.then( res => res.json() )
+			.then( data => {
+				const formattedEvents = formatEvents( data );
+				// @ts-ignore
+				setEvents( formattedEvents );
+			} );
+	}, [] );
 
-  const getDaysInMonth = (/** @type {number} */ month, /** @type {number} */ year) => {
-    return new Date(year, month, 0).getDate();
-    };
-    
-    
-    
-    return (
-        <div>
-            
-        </div>
-    );
+	return (
+		<div>
+			<CalenderMonth day={ currentDate } events={ events } />
+		</div>
+	);
 };
 
 export default Calender;
