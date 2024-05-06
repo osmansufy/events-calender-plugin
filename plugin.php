@@ -21,6 +21,7 @@ final class OS_Event_Calendar
     const VERSION = '0.0.1';
     public function __construct()
     {
+        add_action('init', [Backend\WR_Events::class, 'cs_register_event_post_type']);
         $this->init();
         $this->constants();
         register_activation_hook(__FILE__, [__CLASS__, 'activate']);
@@ -55,6 +56,19 @@ final class OS_Event_Calendar
 
     public static function deactivate()
     {
+        // Unregister custom  event post type
+        unregister_post_type('event');
+        // Delete all events
+        $args = array(
+            'post_type' => 'event',
+            'posts_per_page' => -1,
+        );
+
+        $posts = get_posts($args);
+
+        foreach ($posts as $post) {
+            wp_delete_post($post->ID, true);
+        }
         flush_rewrite_rules();
     }
 }

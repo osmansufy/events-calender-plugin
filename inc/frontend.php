@@ -26,15 +26,22 @@ function bootstrap(): void
  */
 function enqueue_script(): void
 {
-	Vite\enqueue_asset(
-		dirname(__DIR__) . '/js/dist',
-		'js/src/main.jsx',
-		[
-			'dependencies' => ['react', 'react-dom'],
-			'handle' => 'vite-for-wp-react',
-			'in-footer' => true,
-		]
-	);
+
+	// if is admin page slug is wr-calendar
+
+	$screen = get_current_screen();
+
+	if ($screen->id === 'toplevel_page_wr-calendar') {
+		Vite\enqueue_asset(
+			dirname(__DIR__) . '/js/dist',
+			'js/src/main.jsx',
+			[
+				'dependencies' => ['react', 'react-dom'],
+				'handle' => 'vite-for-wp-react',
+				'in-footer' => true,
+			]
+		);
+	}
 }
 
 
@@ -44,6 +51,10 @@ function enqueue_script(): void
 
 function frontend_enqueue_script(): void
 {
-	wp_enqueue_script('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/js/script.js', [], OS_EVENT_CALENDAR_VERSION, true);
-	wp_enqueue_style('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/css/style.css', [], OS_EVENT_CALENDAR_VERSION);
+
+	// check if the page is a single post page and if the post type is event post type
+	if (is_single() && get_post_type() === 'event') {
+		wp_enqueue_script('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/js/script.js', [], OS_EVENT_CALENDAR_VERSION, true);
+		wp_enqueue_style('os-event-calendar', OS_EVENT_CALENDAR_ASSETS . '/css/style.css', [], OS_EVENT_CALENDAR_VERSION);
+	}
 }
