@@ -3,7 +3,7 @@
 /**
  * Plugin Name: OS Event Calendar
  * Plugin URI: https://github.com/osmansufy/events-calender-plugin
- * Description: A plugin to demonstrate Vite for WP integration.
+ * Description: A plugin to manage events and display them in a calendar.
  * Author: Osman Sufy
  * Author URI: osmansufy.com
  * License: GPLv2
