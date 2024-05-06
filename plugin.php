@@ -2,6 +2,7 @@
 
 /**
  * Plugin Name: OS Event Calendar
+ * Plugin URI: https://github.com/osmansufy/events-calender-plugin
  * Description: A plugin to demonstrate Vite for WP integration.
  * Author: Osman Sufy
  * Author URI: osmansufy.com
@@ -14,8 +15,6 @@ namespace OS_Event_Calendar;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/frontend.php';
-
-
 
 final class OS_Event_Calendar
 {

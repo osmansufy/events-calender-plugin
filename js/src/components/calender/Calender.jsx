@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CalenderMonth from './CalenderMonth';
+import CalenderMonth from './calenderTable/CalenderMonth';
 
 const Calender = () => {
 	const [ currentDate, setCurrentDate ] = useState( new Date() );
@@ -33,14 +33,24 @@ const Calender = () => {
 		setCurrentDate( newDate );
 	};
 
+	// implement the onChangeYear function here later
 	const onChangeYear = ( /** @type {number} */ year ) => {
 		let newDate = new Date( currentDate );
 		newDate.setFullYear( newDate.getFullYear() + year );
 		setCurrentDate( newDate );
 	};
+
+	const onChangeToday = () => {
+		setCurrentDate( new Date() );
+	};
 	return (
 		<div>
-			<CalenderMonth day={ currentDate } events={ events } onChangeMonth={ onChangeMonth } />
+			<CalenderMonth 
+			day={ currentDate } 
+			events={ events } 
+			onChangeMonth={ onChangeMonth } 
+			onChangeToday={ onChangeToday }
+			/>
 		</div>
 	);
 };

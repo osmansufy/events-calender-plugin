@@ -3,7 +3,7 @@ const CalenderHeader = (
     {
         day: Date;
 		onChangeMonth: (month: number) => void;
-    
+    onChangeToday: () => void;
     }
 } */ props,
 ) => {
@@ -11,7 +11,7 @@ const CalenderHeader = (
 	let currentYear = props.day.getFullYear();
 	return (
 		<div className="header flex justify-between border-b p-8">
-			<div className="buttons">
+			<div className="buttons flex items-center">
 				<button
 					className="p-4"
 					onClick={
@@ -40,7 +40,7 @@ const CalenderHeader = (
 					</svg>
 				</button>
 				<button
-					className="p-1"
+					className="p-1 "
 					onClick={
 						/** @type {any} */
 						() => props.onChangeMonth( 1 )
@@ -50,7 +50,6 @@ const CalenderHeader = (
 						fill="gray"
 						height="2em"
 						viewBox="0 0 16 16"
-						className="bi bi-arrow-right-circle"
 						xmlns="http://www.w3.org/2000/svg">
 						<path
 							fillRule="evenodd"
@@ -65,6 +64,15 @@ const CalenderHeader = (
 							d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"
 						/>
 					</svg>
+				</button>
+
+				<button
+					className="px-4 py-2 mx-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-500 ease-in-out"
+					onClick={
+						/** @type {any} */
+						() => props.onChangeToday()
+					}>
+					Today
 				</button>
 			</div>
 			<span className="text-lg font-bold">
