@@ -1,6 +1,6 @@
 <?php
 
-namespace OS_Event_Calendar\Backend;
+namespace OS_Event_Calendar;
 
 
 class WR_Events
@@ -8,7 +8,7 @@ class WR_Events
 
     public function __construct()
     {
-
+        add_action('init', [$this, 'cs_register_event_post_type']);
         add_action('add_meta_boxes', array($this, 'cs_add_event_metabox'));
         add_action('save_post', array($this, 'cs_save_event_metabox'));
         add_filter('manage_event_posts_columns', array($this, 'cs_add_event_columns'));

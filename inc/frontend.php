@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace OS_Event_Calendar;
 
 use Kucrut\Vite;
 

@@ -5,7 +5,7 @@
 Class responsible for the admin page of the calendar.
 */
 
-namespace OS_Event_Calendar\Backend;
+namespace OS_Event_Calendar;
 
 
 class WR_Calendar

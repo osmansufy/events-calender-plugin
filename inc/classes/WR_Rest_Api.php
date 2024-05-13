@@ -1,7 +1,7 @@
 <?php
 
 
-namespace OS_Event_Calendar\Backend;
+namespace OS_Event_Calendar;
 
 
 class WR_Rest_Api

@@ -7,13 +7,17 @@
  * Author: Osman Sufy
  * Author URI: osmansufy.com
  * License: GPLv2
- * Version: 0.0.1
+ * Version: 1.0.0
  * Text Domain: os-event-calendar
  */
 
-namespace OS_Event_Calendar;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 require_once __DIR__ . '/vendor/autoload.php';
+
 require_once __DIR__ . '/inc/frontend.php';
 
 final class OS_Event_Calendar
@@ -21,12 +25,11 @@ final class OS_Event_Calendar
     const VERSION = '0.0.1';
     public function __construct()
     {
-        add_action('init', [Backend\WR_Events::class, 'cs_register_event_post_type']);
+
         $this->init();
         $this->constants();
         register_activation_hook(__FILE__, [__CLASS__, 'activate']);
         register_deactivation_hook(__FILE__, [__CLASS__, 'deactivate']);
-        bootstrap();
     }
 
 
@@ -44,9 +47,11 @@ final class OS_Event_Calendar
     public static function init()
     {
 
-        new Backend\WR_Rest_Api();
-        new Backend\WR_Events();
-        new Backend\WR_Calendar();
+        new OS_Event_Calendar\WR_Calendar();
+        new OS_Event_Calendar\WR_Events();
+        new OS_Event_Calendar\WR_Rest_Api();
+
+        bootstrap();
     }
 
     public static function activate()
