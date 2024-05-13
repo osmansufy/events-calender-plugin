@@ -70,6 +70,8 @@ class WR_Events
         );
 
         register_post_type('event', $args);
+        // after registering the post type, we need to flush the rewrite rules
+        flush_rewrite_rules();
     }
 
     // add metabox for event date and time
